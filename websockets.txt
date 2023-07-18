@@ -14,4 +14,32 @@ webRTC -> uses UDP -> Skips missed data like one frame / chops as re-asking take
 
 webRTC : p2p -> Browsers talk to each other 
 
-Browser A to B and not via a Server like http or ws.
+Browser A to B and not via a Server like http or ws. -> but what about other server's url and port?
+
+browser -> request -> STUN Server -> Ip/port -> browser -> other browsers for communication
+
+B1 -> Stun -> B1 with data = b1d
+B2 -> Stun -> B2 with data = b2d
+
+b1d <-> web sockets server (signalling server) <-> b2d (initial handshake for exchange of ip/port)
+
+now, b1d <--> b2d (data sharing) directly via p2p webRTC
+
+Ice candidates -> Ip + Port + protocol (search for webRTC - Trickle Ice by google)
+
+RTCPeerConnection -> obj in JS
+
+const pc = new RTCPeerConnection()
+
+pc.localDescription -> your ICE candidates 
+pc.remoteDescription -> other's ICE candidates
+
+after handshake => B1 localDescription = B2 remoteDescription and vice versa
+
+SDP - research ? the current session's ICE candidates 
+
+Tracks -> pc.addTrack() to send and pc.onTrack() to receive after  exchanging SDP's
+
+chrome://webrtc-internals
+
+same browser webRTC without signalling server: https://jsfiddle.net/rainzhao/3L9sfsvf/
