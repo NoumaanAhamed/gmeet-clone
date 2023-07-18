@@ -1,0 +1,17 @@
+Real-Time Communication : (w/o refreshing)
+1. Send the GET request every 5 seconds(like Fetch) -> Polling[not real-time,snappy X,need for asking]
+2. Web Sockets -> Receive events async (the new data is provided from server itself).
+
+frontend(single user) -> event -> backend(ws)
+backend -> emit event -> frontend(all users)
+
+webRTC : The Event is Video/Audio
+
+30 images/sec -> sent in real-time via web sockets.
+
+ws/http -> uses TCP -> not ideal as TCP retries every failure like instagram page refresh.
+webRTC -> uses UDP -> Skips missed data like one frame / chops as re-asking takes time.
+
+webRTC : p2p -> Browsers talk to each other 
+
+Browser A to B and not via a Server like http or ws.
